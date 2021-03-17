@@ -4,7 +4,7 @@ export default function PaginationBar() {
       <div className="clearfix">
         <div className="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
         <ul className="pagination">
-          <li className="page-item disabled"><a href="#">Previous</a></li>
+          <li className="page-item disabled"><a href="#" className="page-link">Previous</a></li>
           <li className="page-item"><a href="#" className="page-link">1</a></li>
           <li className="page-item"><a href="#" className="page-link">2</a></li>
           <li className="page-item active"><a href="#" className="page-link">3</a></li>
@@ -13,7 +13,7 @@ export default function PaginationBar() {
           <li className="page-item"><a href="#" className="page-link">Next</a></li>
         </ul>
       </div>
-      <style>{`
+      <style jsx>{`
         .pagination {
           float: right;
           margin: 0 0 5px;
@@ -35,8 +35,9 @@ export default function PaginationBar() {
         }  
         .pagination li.active a, .pagination li.active a.page-link {
           background: #03A9F4;
+          color: #f5f5f5;
         }
-        .pagination li.active a:hover {        
+        .pagination li.active a:hover {
           background: #0397d6;
         }
         .pagination li.disabled i {

@@ -24,7 +24,7 @@ export default function CreateModal() {
               <div className="form-group">
                 <label>Phone</label>
                 <input type="text" className="form-control" required />
-              </div>					
+              </div>
             </div>
             <div className="modal-footer">
               <input type="button" className="btn btn-default" data-dismiss="modal" value="Cancel" />

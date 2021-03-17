@@ -1,12 +1,14 @@
 import Head from 'next/head'
-import CreateModal from '../../components/create-modal.js';
+import AddModal from '../../components/add-modal.js';
 import EditModal from '../../components/edit-modal.js';
 import DeleteModal from '../../components/delete-modal.js';
 import Table from '../../components/table.js';
 import PaginationBar from '../../components/pagination-bar.js';
+import React from "react";
 
-export default function Crud() {
-  return (
+class CRUD extends React.Component {
+  render() {
+    return (
       <div className="crud-container">
         <Head>
           <title>CRUD</title>
@@ -15,6 +17,9 @@ export default function Crud() {
           <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" />
           <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
           <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"></link>
+          <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+          <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+          <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
         </Head>
 
         <div className="container-xl">
@@ -26,14 +31,14 @@ export default function Crud() {
                     <h2>Manage <b>Employees</b></h2>
                   </div>
                   <div className="col-sm-6">
-                    <button type="button" className="btn btn-success" data-toggle="modal">
+                    <a href="#addEmployeeModal" className="btn btn-success" data-toggle="modal">
                       <i className="material-icons">&#xE147;</i>
                       <span>Add New Employee</span>
-                    </button>
-                    <button type="button" className="btn btn-danger" data-toggle="modal">
+                    </a>
+                    <a href="#deleteEmployeeModal" className="btn btn-danger" data-toggle="modal">
                       <i className="material-icons">&#xE15C;</i>
                       <span>Delete</span>
-                    </button>
+                    </a>
                   </div>
                 </div>
               </div>
@@ -42,7 +47,7 @@ export default function Crud() {
             </div>
           </div>
         </div>
-        <CreateModal />
+        <AddModal />
         <EditModal />
         <DeleteModal />
         <style jsx>{`
@@ -105,5 +110,8 @@ export default function Crud() {
           }
         `}</style>
       </div>
-  )
+    )
+  }
 }
+
+export default CRUD;
