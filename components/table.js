@@ -1,42 +1,6 @@
 import React from "react";
+import { connect } from "react-redux";
 class Table extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      employeeList: [
-        {
-          name: 'Thomas Hardy',
-          email: 'thomashardy@mail.com',
-          address: '',
-          phone: ''
-        },
-        {
-          name: '',
-          email: '',
-          address: '',
-          phone: ''
-        },
-        {
-          name: '',
-          email: '',
-          address: '',
-          phone: ''
-        },
-        {
-          name: '',
-          email: '',
-          address: '',
-          phone: ''
-        },
-        {
-          name: '',
-          email: '',
-          address: '',
-          phone: ''
-        }
-      ]
-    };
-  }
 
   selectAllCheckboxes(e) {
     const checkboxes = document.querySelectorAll('input[type=checkbox]');
@@ -67,86 +31,24 @@ class Table extends React.Component {
             </tr>
           </thead>
           <tbody>
-            <tr>
+          {this.props.employeeList.map((employeeItem, i) =>
+            <tr key={i}>
               <td>
                 <span className="custom-checkbox">
-                  <input type="checkbox" id="checkbox1"/>
-                  <label htmlFor="checkbox1"></label>
+                  <input type="checkbox" id={`checkbox${i}`}/>
+                  <label htmlFor={`checkbox${i}`}></label>
                 </span>
               </td>
-              <td>Thomas Hardy</td>
-              <td>thomashardy@mail.com</td>
-              <td>89 Chiaroscuro Rd, Portland, USA</td>
-              <td>(171) 555-2222</td>
+              <td>{employeeItem.name}</td>
+              <td>{employeeItem.email}</td>
+              <td>{employeeItem.address}</td>
+              <td>{employeeItem.phone}</td>
               <td>
                 <a href="#editEmployeeModal" className="edit" data-toggle="modal"><i className="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
                 <a href="#deleteEmployeeModal" className="delete" data-toggle="modal"><i className="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
               </td>
             </tr>
-            <tr>
-              <td>
-                <span className="custom-checkbox">
-                  <input type="checkbox" id="checkbox2"/>
-                  <label htmlFor="checkbox2"></label>
-                </span>
-              </td>
-              <td>Dominique Perrier</td>
-              <td>dominiqueperrier@mail.com</td>
-              <td>Obere Str. 57, Berlin, Germany</td>
-              <td>(313) 555-5735</td>
-              <td>
-                <a href="#editEmployeeModal" className="edit" data-toggle="modal"><i className="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                <a href="#deleteEmployeeModal" className="delete" data-toggle="modal"><i className="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <span className="custom-checkbox">
-                  <input type="checkbox" id="checkbox3"/>
-                  <label htmlFor="checkbox3"></label>
-                </span>
-              </td>
-              <td>Maria Anders</td>
-              <td>mariaanders@mail.com</td>
-              <td>25, rue Lauriston, Paris, France</td>
-              <td>(503) 555-9931</td>
-              <td>
-                <a href="#editEmployeeModal" className="edit" data-toggle="modal"><i className="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                <a href="#deleteEmployeeModal" className="delete" data-toggle="modal"><i className="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <span className="custom-checkbox">
-                  <input type="checkbox" id="checkbox4"/>
-                  <label htmlFor="checkbox4"></label>
-                </span>
-              </td>
-              <td>Fran Wilson</td>
-              <td>franwilson@mail.com</td>
-              <td>C/ Araquil, 67, Madrid, Spain</td>
-              <td>(204) 619-5731</td>
-              <td>
-                <a href="#editEmployeeModal" className="edit" data-toggle="modal"><i className="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                <a href="#deleteEmployeeModal" className="delete" data-toggle="modal"><i className="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <span className="custom-checkbox">
-                  <input type="checkbox" id="checkbox5"/>
-                  <label htmlFor="checkbox5"></label>
-                </span>
-              </td>
-              <td>Martin Blank</td>
-              <td>martinblank@mail.com</td>
-              <td>Via Monte Bianco 34, Turin, Italy</td>
-              <td>(480) 631-2097</td>
-              <td>
-                <a href="#editEmployeeModal" className="edit" data-toggle="modal"><i className="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                <a href="#deleteEmployeeModal" className="delete" data-toggle="modal"><i className="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-              </td>
-            </tr> 
+          )}
           </tbody>
         </table>
         <style jsx>{`
@@ -258,4 +160,10 @@ class Table extends React.Component {
   }
 }
 
-export default Table;
+const mapStateToProps = state => {
+  return {
+    employeeList: state.employee.employee
+  }
+}
+
+export default connect(mapStateToProps)(Table);
