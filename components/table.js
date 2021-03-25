@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import { removeEmployee } from "../store/actions/employeesActions";
 class Table extends React.Component {
 
   selectAllCheckboxes(e) {
@@ -9,6 +10,11 @@ class Table extends React.Component {
     } else {
       checkboxes.forEach(checkbox => checkbox.checked = false);
     }
+  }
+
+  deleteEmployee(id) {
+    const newEmployeesList = this.props.employeesList.filter(employeeItem => employeeItem.id !== id);
+    removeEmployee(newEmployeesList);
   }
 
   render() {
@@ -31,7 +37,7 @@ class Table extends React.Component {
             </tr>
           </thead>
           <tbody>
-          {this.props.employeeList.map((employeeItem, i) =>
+          {this.props.employeesList.map((employeeItem, i) =>
             <tr key={i}>
               <td>
                 <span className="custom-checkbox">
@@ -44,8 +50,12 @@ class Table extends React.Component {
               <td>{employeeItem.address}</td>
               <td>{employeeItem.phone}</td>
               <td>
-                <a href="#editEmployeeModal" className="edit" data-toggle="modal"><i className="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                <a href="#deleteEmployeeModal" className="delete" data-toggle="modal"><i className="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+                <a href="#editEmployeeModal" className="edit" data-toggle="modal">
+                  <i className="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i>
+                </a>
+                <button className="delete">
+                  <i className="material-icons" data-toggle="tooltip" title="Delete" onClick={() => this.deleteEmployee(employeeItem.id)}>&#xE872;</i>
+                </button>
               </td>
             </tr>
           )}
@@ -79,20 +89,20 @@ class Table extends React.Component {
             font-size: 22px;
             margin: 0 5px;
           }
-          table.table td a {
+          table.table td a button {
             font-weight: bold;
             color: #566787;
             display: inline-block;
             text-decoration: none;
             outline: none !important;
           }
-          table.table td a:hover {
+          table.table td a:hover button:hover {
             color: #2196F3;
           }
           table.table td a.edit {
             color: #FFC107;
           }
-          table.table td a.delete {
+          table.table td button.delete {
             color: #F44336;
           }
           table.table td i {
@@ -102,6 +112,12 @@ class Table extends React.Component {
             border-radius: 50%;
             vertical-align: middle;
             margin-right: 10px;
+          }
+          .delete {
+            padding: 0;
+            border: none;
+            background: transparent;
+            outline: none;
           }
           /* Custom checkbox */
           .custom-checkbox {
@@ -162,7 +178,7 @@ class Table extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    employeeList: state.employee.employee
+    employeesList: state.employeesReducer.employees
   }
 }
 
