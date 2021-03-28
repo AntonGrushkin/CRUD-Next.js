@@ -22,7 +22,7 @@ class AddModal extends React.Component {
     })
   }
 
-  handleSubmit(event) {
+  handleSubmit = event => {
     /* 
       array.map() вернет новый массив с числами
       затем мы прибавим единицу к текущей длине массива и таким образом получим актуальный id

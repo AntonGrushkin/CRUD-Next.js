@@ -40,6 +40,7 @@ export const employeesReducer = (state = initialState, action) => {
         ...state,
         employees: [...state.employees, action.payload]
       }
+    case types.EDIT_EMPLOYEE:
     case types.REMOVE_EMPLOYEE:
       return {
         ...state,

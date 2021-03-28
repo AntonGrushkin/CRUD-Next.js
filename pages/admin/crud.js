@@ -43,7 +43,7 @@ class CRUD extends React.Component {
                 </div>
               </div>
               <Table />
-              <PaginationBar />
+              {/* <PaginationBar /> */}
             </div>
           </div>
         </div>

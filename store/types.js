@@ -1,2 +1,3 @@
 export const ADD_EMPLOYEE = 'ADD_EMPLOYEE';
 export const REMOVE_EMPLOYEE = 'REMOVE_EMPLOYEE';
+export const EDIT_EMPLOYEE = 'EDIT_EMPLOYEE';

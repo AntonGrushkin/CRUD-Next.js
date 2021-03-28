@@ -15,3 +15,10 @@ export const removeEmployee = newEmployeesList => {
   });
 }
 
+export const editEmployee = newEmployeesList => {
+  store.dispatch({
+    type: types.EDIT_EMPLOYEE,
+    payload: newEmployeesList
+  });
+}
+

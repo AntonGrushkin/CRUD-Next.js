@@ -1,9 +1,10 @@
 import React from "react";
 import { connect } from "react-redux";
 import { removeEmployee } from "../store/actions/employeesActions";
+import Emitter from '../plugins/emitter';
 class Table extends React.Component {
 
-  selectAllCheckboxes(e) {
+  selectAllCheckboxes = e => {
     const checkboxes = document.querySelectorAll('input[type=checkbox]');
     if (e.target.checked) {
       checkboxes.forEach(checkbox => checkbox.checked = true);
@@ -12,7 +13,11 @@ class Table extends React.Component {
     }
   }
 
-  deleteEmployee(id) {
+  editEmployee = id => {
+    Emitter.emit('EDIT_EMPLOYEE_HANDLER', id);
+  }
+
+  deleteEmployee = id => {
     const newEmployeesList = this.props.employeesList.filter(employeeItem => employeeItem.id !== id);
     removeEmployee(newEmployeesList);
   }
@@ -50,7 +55,7 @@ class Table extends React.Component {
               <td>{employeeItem.address}</td>
               <td>{employeeItem.phone}</td>
               <td>
-                <a href="#editEmployeeModal" className="edit" data-toggle="modal">
+                <a href="#editEmployeeModal" className="edit" data-toggle="modal" onClick={() => this.editEmployee(employeeItem.id)}>
                   <i className="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i>
                 </a>
                 <button className="delete">
