@@ -36,6 +36,7 @@ class EditModal extends React.Component {
   }
 
   handleSubmit(event) {
+    event.preventDefault();
     const newEmployee = {
       id: this.state.employeeId,
       name: this.state.name,
@@ -46,8 +47,6 @@ class EditModal extends React.Component {
 
     const newEmployeesList = this.props.employeesList.map(employee => employee.id === this.state.employeeId ? newEmployee : employee);
     editEmployee(newEmployeesList);
-
-    event.preventDefault();
   }
 
   render() {

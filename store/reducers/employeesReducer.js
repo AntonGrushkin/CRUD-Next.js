@@ -30,7 +30,8 @@ const initialState = {
       address: 'Via Monte Bianco 34, Turin, Italy',
       phone: '(480) 631-2097'
     }
-  ]
+  ],
+  selectedEmployeesId: []
 };
 
 export const employeesReducer = (state = initialState, action) => {
@@ -41,10 +42,15 @@ export const employeesReducer = (state = initialState, action) => {
         employees: [...state.employees, action.payload]
       }
     case types.EDIT_EMPLOYEE:
-    case types.REMOVE_EMPLOYEE:
+    case types.REMOVE_EMPLOYEES:
       return {
         ...state,
         employees: action.payload
+      }
+    case types.GET_SELECTED_EMPLOYEES_ID:
+      return {
+        ...state,
+        selectedEmployeesId: action.payload
       }
     default:
       return state;

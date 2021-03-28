@@ -1,25 +1,41 @@
 import React from "react";
 import { connect } from "react-redux";
-import { removeEmployee } from "../store/actions/employeesActions";
+import { removeEmployees, getSelectedEmployeesId } from "../store/actions/employeesActions";
 import Emitter from '../plugins/emitter';
 class Table extends React.Component {
 
   selectAllCheckboxes = e => {
-    const checkboxes = document.querySelectorAll('input[type=checkbox]');
+    const checkboxes = document.querySelectorAll('input.row-checkbox');
+    let selectedEmployeesId = [];
+
     if (e.target.checked) {
-      checkboxes.forEach(checkbox => checkbox.checked = true);
+      checkboxes.forEach(checkbox => {
+        checkbox.checked = true;
+        selectedEmployeesId.push(Number(checkbox.dataset.id));
+      })
     } else {
-      checkboxes.forEach(checkbox => checkbox.checked = false);
+      checkboxes.forEach(checkbox => {
+        checkbox.checked = false;
+        selectedEmployeesId = [];
+      })
     }
+
+    getSelectedEmployeesId(selectedEmployeesId);
+  }
+
+  getSelectedEmployeesId = employeeId => {
+    let selectedEmployeesId = [];
+    selectedEmployeesId.push(employeeId);
+    getSelectedEmployeesId(selectedEmployeesId);
   }
 
   editEmployee = id => {
     Emitter.emit('EDIT_EMPLOYEE_HANDLER', id);
   }
 
-  deleteEmployee = id => {
+  removeEmployee = id => {
     const newEmployeesList = this.props.employeesList.filter(employeeItem => employeeItem.id !== id);
-    removeEmployee(newEmployeesList);
+    removeEmployees(newEmployeesList);
   }
 
   render() {
@@ -46,7 +62,7 @@ class Table extends React.Component {
             <tr key={i}>
               <td>
                 <span className="custom-checkbox">
-                  <input type="checkbox" id={`checkbox${i}`}/>
+                  <input type="checkbox" id={`checkbox${i}`} className="row-checkbox" data-id={employeeItem.id} onChange={() => this.getSelectedEmployeesId(employeeItem.id)}/>
                   <label htmlFor={`checkbox${i}`}></label>
                 </span>
               </td>
@@ -59,7 +75,7 @@ class Table extends React.Component {
                   <i className="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i>
                 </a>
                 <button className="delete">
-                  <i className="material-icons" data-toggle="tooltip" title="Delete" onClick={() => this.deleteEmployee(employeeItem.id)}>&#xE872;</i>
+                  <i className="material-icons" data-toggle="tooltip" title="Delete" onClick={() => this.removeEmployee(employeeItem.id)}>&#xE872;</i>
                 </button>
               </td>
             </tr>
