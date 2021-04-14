@@ -1,2 +1,2 @@
 This is a starter template for [Learn Next.js](https://nextjs.org/learn).
-[![Everything Is AWESOME](https://www.youtube.com/watch?v=StTqXEQ2l-Y "Everything Is AWESOME")
+[![Everything Is AWESOME](http://i3.ytimg.com/vi/loqSDGgtmKg/maxresdefault.jpg)](https://www.youtube.com/watch?v=loqSDGgtmKg)
